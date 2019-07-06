@@ -1,0 +1,19 @@
+{
+  "name": "chatkat",
+  "version": "1.0.0",
+  "description": "Chat Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SerdarHalac/ChatKat.git"
+  },
+  "author": "Serdar Halac",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/SerdarHalac/ChatKat/issues"
+  },
+  "homepage": "https://github.com/SerdarHalac/ChatKat#readme"
+}
