@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/SerdarHalac/ChatKat/issues"
   },
-  "homepage": "https://github.com/SerdarHalac/ChatKat#readme"
+  "homepage": "https://github.com/SerdarHalac/ChatKat#readme",
+  "devDependencies": {
+    "eslint": "^6.0.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
