@@ -14,15 +14,28 @@
         <div id="chat-box">
 
         </div>
-        <div class="ui fluid action input">
-            <input type="text" placeholder="Type your message here">
-            <div class="ui button blue">Send</div>
-        </div>
+        <form action="" id="message-form">
+            <div class="ui fluid action input">
+                <input id="message-input" type="text" placeholder="Type your message here">
+                <button id="message-submit" class="ui button blue">Send</button>
+            </div>
+        </form>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
     <script>
-        var socket = io();
+        $(function () {
+            var socket = io();
+            $('#message-form').submit(function(e){
+                e.preventDefault();
+                socket.emit('chat message', $('#message-input').val());
+                $('#message-input').val('');
+                return false;
+            });
+        });
     </script>
 </body>
 </html>
