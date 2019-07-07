@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+}
+.chat-container {
+    width: 50%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+#chat-box {
+    border: black 2px solid;
+    height: 80%;
+    overflow: auto;
+}

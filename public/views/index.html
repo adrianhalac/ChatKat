@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,7 +13,7 @@
 
     <div class="chat-container">
         <div id="chat-box">
-
+            <h1></h1>
         </div>
         <form action="" id="message-form">
             <div class="ui fluid action input">
@@ -34,6 +35,11 @@
                 socket.emit('chat message', $('#message-input').val());
                 $('#message-input').val('');
                 return false;
+            });
+            socket.on('chat message', function(msg){
+                let chatHtml = '<div class="ui visible message"><p>' + msg + '</p></div>';
+                $('#chat-box').append(chatHtml);
+
             });
         });
     </script>
