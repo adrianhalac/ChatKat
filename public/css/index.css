@@ -16,11 +16,36 @@ h2 {
 
 #chat-box {
     border: black 2px solid;
-    border-radius: 5px;
+    border-radius: 20px;
     height: 80%;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+#chat-box::-webkit-scrollbar { 
+        display: none;
 }
 
 #message-form {
     margin-top: 10px;
+}
+
+.msg {
+    border: solid #404040 2px;
+    border-radius: 5px;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;  
+    position: relative;
+    overflow:hidden; 
+}
+
+.msg p {
+    margin-right: 10%;
+    margin-left: 10%;
+    height: 100%;
+    font-size: x-large;
+    vertical-align: middle;
 }

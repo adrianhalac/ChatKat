@@ -39,12 +39,13 @@
                 return false;
             });
             socket.on('chat message', function(msg){
-                let chatHtml = '<div class="ui visible message"><p>' + msg + '</p></div>';
-                $('#chat-box').append(chatHtml);
-                $('#chat-box').scrollTop(function() {
-                    return this.scrollHeight;
-                });
-
+                if(msg != '') {
+                    let chatHtml = '<div class="msg"><p>' + msg + '</p></div>';
+                    $('#chat-box').append(chatHtml);
+                    $('#chat-box').scrollTop(function() {
+                        return this.scrollHeight;
+                    });
+                }
             });
         });
     </script>
