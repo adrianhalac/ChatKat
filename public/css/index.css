@@ -40,12 +40,37 @@ h2 {
     margin-bottom: 1%;  
     position: relative;
     overflow:hidden; 
+    display: flex;
 }
 
-.msg p {
-    margin-right: 10%;
-    margin-left: 10%;
-    height: 100%;
-    font-size: x-large;
+.msg .actual-message {
+    flex-basis: 85%;
+    font-size: large;
     vertical-align: middle;
+    font-family: 'Amiri', serif;
+}
+
+.msg .actual-message p {
+    vertical-align: text-bottom;
+    padding-left: 3px;
+}
+
+.time-stamp {
+    /* border-left: solid black 2px; */
+    flex-basis: 15%;
+    font-size: 60%;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.introDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#userDisplay {
+    font-size: 30%;
+    align-self: flex-end;
+    padding-right: 30px;
 }

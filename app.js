@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+let date = require('date-and-time');
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
@@ -12,13 +13,22 @@ app.get('/', function(req, res){
     res.render('index.html');
 });
 
+let usersTotal = 0;
+
 io.on('connection', function(socket) {
+    usersTotal += 1;
     console.log('A user has connected');
+    io.emit('user on', {totalUsers: usersTotal});
     socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
+        let now = new Date();
+        let timeToSend = date.format(now, 'hh:mm A');
+        let senderObject = {message: msg, timer: timeToSend};
+        io.emit('chat message', senderObject);
     });
     socket.on('disconnect', function() {
+        usersTotal -= 1;
         console.log('A user has disconnected');
+        io.emit('user off', {totalUsers: usersTotal});
     });
 });
 

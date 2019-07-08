@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amiri|DM+Serif+Text|Rubik+Mono+One|Tinos:700i|Work+Sans:300|Yantramanav:100&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <meta charset="UTF-8">
@@ -10,8 +10,14 @@
     <title>ChatKat</title>
 </head>
 <body>
-    <h1>Welcome to ChatKat!</h1>
-    <h2>A minimalist chat application</h2>
+    <div class="introDiv">
+        <div class="titles">
+            <h1>Welcome to ChatKat!</h1>
+            <h2>A minimalist chat application</h2>
+        </div>
+        <div id="userDisplay">
+        </div>
+    </div>
 
     <div class="chat-container">
         <div id="chat-box">
@@ -38,14 +44,31 @@
                 $('#message-input').val('');
                 return false;
             });
-            socket.on('chat message', function(msg){
-                if(msg != '') {
-                    let chatHtml = '<div class="msg"><p>' + msg + '</p></div>';
+            socket.on('chat message', function(data){
+                if(data.message != '') {
+                    let chatHtml = '<div class="msg"><div class="actual-message"><p>' + data.message + '</p></div><div class=time-stamp>' + data.timer + '</div></div>';
                     $('#chat-box').append(chatHtml);
                     $('#chat-box').scrollTop(function() {
                         return this.scrollHeight;
                     });
                 }
+            });
+            socket.on('user on', function(data){
+                let userHtml = "";
+                if(data.totalUsers == 1) {
+                    userHtml = '<h1>1 user online</h1>';
+                } else {
+                    userHtml = '<h1>' + data.totalUsers + ' users online</h1>';
+                }
+                $('#userDisplay').html(userHtml);
+            });
+            socket.on('user off', function(data){
+                if(data.totalUsers == 1) {
+                    let userHtml = '<h1>1 user online</h1>';
+                } else {
+                    let userHtml = '<h1>' + data.totalUsers + ' users online</h1>';
+                }
+                $('#userDisplay').html(userHtml);
             });
         });
     </script>
