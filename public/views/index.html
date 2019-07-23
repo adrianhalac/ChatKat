@@ -38,16 +38,21 @@
     <script>
         $(function () {
             var socket = io();
+            socket.on('connect', function() {
+                socket.emit('newUserColor', socket.id);
+            });
             $('#message-form').submit(function(e){
                 e.preventDefault();
-                socket.emit('chat message', $('#message-input').val());
+                let dataObj = {msg: $('#message-input').val(), socketId: socket.id};
+                socket.emit('chat message', dataObj);
                 $('#message-input').val('');
                 return false;
             });
             socket.on('chat message', function(data){
                 if(data.message != '') {
+                    let chatHtml1 = '<div ' + data.styleString + ' class="msg"><div class="actual-message"><p>' + data.message + '</p></div><div class=time-stamp>' + data.timer + '</div></div>';
                     let chatHtml = '<div class="msg"><div class="actual-message"><p>' + data.message + '</p></div><div class=time-stamp>' + data.timer + '</div></div>';
-                    $('#chat-box').append(chatHtml);
+                    $('#chat-box').append(chatHtml1);
                     $('#chat-box').scrollTop(function() {
                         return this.scrollHeight;
                     });

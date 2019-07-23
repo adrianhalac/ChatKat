@@ -14,16 +14,26 @@ app.get('/', function(req, res){
 });
 
 let usersTotal = 0;
+let userColors = {};
 
 io.on('connection', function(socket) {
     usersTotal += 1;
     console.log('A user has connected');
     io.emit('user on', {totalUsers: usersTotal});
-    socket.on('chat message', function(msg){
+    socket.on('chat message', function(msgObj){
         let now = new Date();
         let timeToSend = date.format(now, 'hh:mm A');
-        let senderObject = {message: msg, timer: timeToSend};
+        let cssToSend = 'style="border-color: ' +  userColors[msgObj.socketId] + ';"';
+        let senderObject = {message: msgObj.msg, timer: timeToSend, styleString: cssToSend};
         io.emit('chat message', senderObject);
+    });
+    socket.on('newUserColor', function(data){
+        let socketId = data;
+        let r = (Math.floor(Math.random() * 256));
+        let g = (Math.floor(Math.random() * 256));
+        let b = (Math.floor(Math.random() * 256));
+        let rgbString = "rgb(" + r + ", " + g + ", " + b + ")";
+        userColors[socketId] = rgbString;
     });
     socket.on('disconnect', function() {
         usersTotal -= 1;
